@@ -4,6 +4,7 @@ import schedule
 import pandas as pd
 from datetime import datetime
 import pyperclip
+import sys
 
 def get_today_message():
     df = pd.read_csv('messages.csv')
@@ -15,7 +16,7 @@ def send_message():
     message = get_today_message()
     pyperclip.copy(message)
 
-    pyautogui.click(x=862, y=344)
+    pyautogui.click(x=945, y=373)
     pyautogui.press('enter')
 
     time.sleep(5)
@@ -27,7 +28,15 @@ def send_message():
 
     print(message)
     pyautogui.press('enter')
+    pyautogui.keyDown('command')
+    pyautogui.keyDown('q')
+    pyautogui.keyUp('q')
+    pyautogui.keyUp('command')
     print('Done!')
+
+    sys.exit()
+
+# print(pyautogui.position())
 
 # schedule.every().day.at('07:00').do(send_message)
 schedule.every(1).minutes.do(send_message)
